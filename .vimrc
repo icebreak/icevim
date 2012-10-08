@@ -3,17 +3,25 @@
 " Basic Setting {
 	let mapleader = ','
 	syntax on
-	set nocompatible				" must be first line
+	set nocompatible
     set laststatus=2
     filetype plugin on
 " }
 
 " Bundle management {
     " Vundle support{
-		set rtp+=$VIM/bundle/vundle
-		call vundle#rc("$VIM/bundle")
+        if has("gui_running")
+		    set rtp+=$VIM/bundle/vundle
+		    call vundle#rc("$VIM/bundle")
+        else
+		    set rtp+=~/bundle/vundle
+		    call vundle#rc("~/bundle")
+        endif
 		"Vundle is short for Vimbundle and is a Vim plugin manager.
 		Bundle 'gmarik/vundle'
+	" }
+	" fugitive {
+	    Bundle 'tpope/vim-fugitive'
 	" }
 	" vim-colorschemes {
 		"one stop shop for vim colorschemes.
@@ -74,17 +82,17 @@
 		"This project contains the most feature complete and up to date PHP Integration for Vim.
         Bundle 'spf13/PIV'
 		" Setting {
-			"let g:DisableAutoPHPFolding = 0
-            "let php_folding = 0
-			"let g:PIVAutoClose          = 0
+			let g:DisableAutoPHPFolding = 0
+            let php_folding = 0
+			let g:PIVAutoClose          = 0
 			" Default values
-			"let g:pdv_cfg_Type          = "mixed"
-			" let g:pdv_cfg_Package     = "Framework"
-			"let g:pdv_cfg_Package       = "Webdav"
-			"let g:pdv_cfg_Version       = "0.1"
-			"let g:pdv_cfg_Author        = "icebreak"
-			"let g:pdv_cfg_Copyright     = "Copyright (c) 2012 All rights reserved."
-			"let g:pdv_cfg_License       = "PHP Version 3.0 {@link http://www.php.net/license/3_0.txt}"
+			let g:pdv_cfg_Type          = "mixed"
+			let g:pdv_cfg_Package     = "Framework"
+			let g:pdv_cfg_Package       = "Webdav"
+			let g:pdv_cfg_Version       = "0.1"
+			let g:pdv_cfg_Author        = "icebreak"
+			let g:pdv_cfg_Copyright     = "Copyright (c) 2012 All rights reserved."
+			let g:pdv_cfg_License       = "PHP Version 3.0 {@link http://www.php.net/license/3_0.txt}"
 		" }
 	" }
 	" ctrlp {
@@ -230,6 +238,7 @@
 		imap zz <ESC>
 		map <leader>c <C-]>
 		map <leader>ts :ts<CR>
+        map <c-u> :update<CR>
 
 		" Easier moving in tabs and windows
 		map <C-j> <C-W>j
@@ -266,6 +275,8 @@
 		if !has('gui_running')
 			set termencoding=utf-8
 			map <F3> :vi ~/.vimrc<CR>
+            colo devbox-dark-256
+            colo oceanblack256
 		endif
 	" }
 " }
